@@ -38,6 +38,28 @@ class Todo extends Component {
 
     render(){
         const heroes = this.props.heroes;
+
+        if(this.state.name == ''){
+            submitButton=(
+            <Button block style={{backgroundColor: 'green'}}
+            disabled >
+                <Text style={{fontSize:15, color: 'white'}}>ADD</Text>
+            </Button>)
+        }else{
+            submitButton=(
+                <Button block style={{backgroundColor:'green'}}
+                onPress={() => Alert.alert(
+                'Berhasil!',
+                'Data berhasil di masukkan ke database.',
+                [
+                    {text: 'OK', onPress: () => this.Next( this.setState({
+                        value : ''
+                    }))}
+                ])}
+                > 
+                    <Text style={{fontSize:15, color: 'white'}}>ADD</Text>  
+            </Button>)}
+
         return(
 
     <Container>
@@ -52,18 +74,7 @@ class Todo extends Component {
         </Content>
         <Footer> 
             <FooterTab>
-                <Button block style={{backgroundColor:'green'}}
-                onPress={() => Alert.alert(
-                'Berhasil!',
-                'Data berhasil di masukkan ke database.',
-                [
-                    {text: 'OK', onPress: () => this.Next( this.setState({
-                        value : ''
-                    }))}
-                ])}
-                > 
-                <Text style={{fontSize:15, color: 'white'}}>ADD</Text>  
-                </Button>
+                {submitButton}
             </FooterTab>
         </Footer>
     </Container>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { ListView, StyleSheet, FlatList, Button, View } from 'react-native';
+import { ListView, StyleSheet, FlatList, Button, View, Alert } from 'react-native';
 import { Container, ListItem, Item, Input, Icon, Text, Fab, Header, Content } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import Todo from './Todo';
 import { connect } from 'react-redux';
-import { fetchHeroes, updateHeroes } from '../components/actions/heroes';
+import { fetchHeroes, updateHeroes, deleteHeroes } from '../components/actions/heroes';
 import _ from 'lodash';
 
 class Main extends Component {
@@ -34,19 +34,24 @@ class Main extends Component {
       componentDidMount() { 
         this.props.dispatch(fetchHeroes());
     }
+    Next = (id) => {
+        this.props.dispatch(deleteHeroes(id));
+    }
     
     _keyExtractor = ({_id}, index) => _id;
 
-    handleUpdate = () =>{
-        this.props.dispatch(updateHeroes());
-    }
-
-    _renderItem = ({item, index}) => (
+    _renderItem = ({item, data, index}) => (
         <View>
             <ListItem
                 keyExtractor={this._keyExtractor}
-                onPress={() => this.handleUpdate(item)}
-            >
+                onPress={() => Alert.alert(
+                    'Notification!',
+                    'Are you sure want to delete this list item ?',
+                    [
+                        {text: 'DELETE', onPress: () => this.Next(item._id)}
+                    ])}
+                >
+            
                 <Text style={{color:'black', top:10}}>{item.name}</Text>
             </ListItem>
         </View>

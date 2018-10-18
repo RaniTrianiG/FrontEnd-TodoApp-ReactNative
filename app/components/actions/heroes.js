@@ -42,8 +42,7 @@ export function deleteHeroes(data){
 
         axios({
             method: 'delete',
-            url : 'http://192.168.0.31:5000/api/heroes/${data._id}',
-            data: data
+            url : `http://192.168.0.31:5000/api/heroes/${data}`
         })
 
     }

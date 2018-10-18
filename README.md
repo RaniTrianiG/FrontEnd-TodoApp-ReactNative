@@ -1,5 +1,5 @@
 # Test Front End TodoApp React Native
-Made by : Rani Triani Gustia 
+Made by : Rani Triani Gustia :heart:
 
 ## Features 
 * Filter Search
@@ -15,11 +15,13 @@ Made by : Rani Triani Gustia
 * Express JS As Data API (clone backend from https://github.com/RaniTrianiG/rest-api-TodoApp.git)
 
 ## Installations
+```
 $ git clone https://github.com/RaniTrianiG/FrontEnd-TodoApp-ReactNative.git
 $ git clone https://github.com/RaniTrianiG/rest-api-TodoApp.git
 $ cd FrontEnd-TodoApp-ReactNative
 $ npm install
 $ react-native run-android
+```
 
 ## Screenshoot
 .                          |  .                        

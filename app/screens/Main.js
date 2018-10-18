@@ -4,7 +4,7 @@ import { Container, ListItem, Item, Input, Icon, Text, Fab } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import Todo from './Todo';
 import { connect } from 'react-redux';
-import { fetchHeroes } from '../components/actions/heroes';
+import { fetchHeroes, updateHeroes } from '../components/actions/heroes';
 import _ from 'lodash';
 
 class Main extends Component {
@@ -26,67 +26,46 @@ class Main extends Component {
         this.state = {
             name: '',
             age: '18 Tahun',
-            loading: false,      
-            data: [],      
-            error: null,
+            val:''
         }
         this.arrayholder = [];
     }
 
-      componentDidMount() {
+      componentDidMount() { 
         this.props.dispatch(fetchHeroes());
     }
     
-    _keyExtractor = (item, index) => item.id;
+    _keyExtractor = ({_id}, index) => _id;
 
-    _renderItem = ({item}) => (
+    handleUpdate = () =>{
+        this.props.dispatch(updateHeroes());
+    }
+
+    _renderItem = ({item, index}) => (
         <View>
-            <ListItem><Text style={{color:'black', top:10}}>{item.name}</Text></ListItem>
+            <ListItem
+                keyExtractor={this._keyExtractor}
+                onPress={() => this.handleUpdate(item)}
+            >
+                <Text style={{color:'black', top:10}}>{item.name}</Text>
+            </ListItem>
         </View>
       );
 
-      makeRemoteRequest = () => {    
-        const url = `http://192.168.0.31:5000/api/heroes/`;
-        this.setState({ loading: true });
-        fetch(url)      
-          .then(res => res.json())      
-          .then(res => {        
-            this.setState({          
-              data: res.results,          
-              error: res.error || null,          
-              loading: false,        
-            });        
-           this.arrayholder = res.results;      
-         })      
-         .catch(error => {        
-           this.setState({ error, loading: false });      
-         });  
-      };  
-
-      searchFilterFunction = text => {    
-        const newData = this.arrayholder.filter(item => {      
-          const itemData = `${item.name.title.toUpperCase()}   
-          ${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`;
-           const textData = text.toUpperCase();
-            
-           return itemData.indexOf(textData) > -1;    
-        });    
-        this.setState({ data: newData });  
-      };  
-      
-
     render(){
+        const searchFilter = this.props.heroes.filter((filter) => {
+            return(filter.name.toLowerCase().indexOf(this.state.val.toLowerCase())!==-1)    
+        })
         return(
             <Container>
 
                 <Item rounded style={{top:20}}>
                     <Icon name="ios-search" />
-                    <Input onChangeText={text => this.searchFilterFunction(text)}
-                     autoCorrect={false} placeholder="Search" />
+                    <Input value={this.state.val} onChangeText={(text)=> this.setState({val:text})} placeholder="Search" />
                 </Item>
             
                 <FlatList
-                        data={this.props.heroes}
+                        data={searchFilter}
                         keyExtractor={this._keyExtractor}
                         renderItem={this._renderItem}
                     />                   

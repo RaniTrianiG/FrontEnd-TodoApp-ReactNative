@@ -22,16 +22,30 @@ export function createHeroes(data){
     };
 }
 
-export function updateHeroes(){
+export function updateHeroes(data){
     return{
-        type: 'UPDATE_FETCH-HERO',
+        type: 'UPDATE_FETCH_HERO',
         payload: 
 
         axios({
             method: 'put',
-            url: 'http://192.168.0.31:5000/api/heroes:id',
-            data: []
+            url: 'http://192.168.0.31:5000/api/heroes/${data._id}',
+            data: data
         })
+    }
+}
+
+export function deleteHeroes(data){
+    return{
+        type: 'DELETE_FETCH_HERO',
+        payload: 
+
+        axios({
+            method: 'delete',
+            url : 'http://192.168.0.31:5000/api/heroes/${data._id}',
+            data: data
+        })
+
     }
 }
 

@@ -26,7 +26,6 @@ class Todo extends Component {
 
     render(){
         const heroes = this.props.heroes;
-        console.log(this.props.heroes);
         return(
 
     <Container>

@@ -21,4 +21,7 @@ export default class ProjectMeel extends Component {
 const AppStackNavigator = createStackNavigator({
   Main: Main,
   Todo: Todo
+},
+{
+  headerLayoutPreset: 'center'
 });

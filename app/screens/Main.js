@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListView, StyleSheet, FlatList, Button, View } from 'react-native';
-import { Container, ListItem, Item, Input, Icon, Text, Fab } from 'native-base';
+import { Container, ListItem, Item, Input, Icon, Text, Fab, Header, Content } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import Todo from './Todo';
 import { connect } from 'react-redux';
@@ -58,18 +58,19 @@ class Main extends Component {
         })
         return(
             <Container>
-
-                <Item rounded style={{top:20}}>
-                    <Icon name="ios-search" />
-                    <Input value={this.state.val} onChangeText={(text)=> this.setState({val:text})} placeholder="Search" />
-                </Item>
-            
-                <FlatList
-                        data={searchFilter}
-                        keyExtractor={this._keyExtractor}
-                        renderItem={this._renderItem}
-                    />                   
-
+                <Header  searchBar noShadow style={{backgroundColor: null}}>
+                    <Item rounded reguler>
+                        <Icon name="ios-search" />
+                        <Input value={this.state.val} onChangeText={(text)=> this.setState({val:text})} placeholder="Search" />
+                    </Item>
+                </Header>
+                <Content>
+                    <FlatList
+                            data={searchFilter}
+                            keyExtractor={this._keyExtractor}
+                            renderItem={this._renderItem}
+                        />                   
+                </Content>
                 <Fab style={{ backgroundColor: 'green' }}
                     onPress={() => this.props.navigation.navigate('Todo')}>
                     <Icon type="FontAwesome" name="plus" style={{ backgroundColor: 'green' }}/>

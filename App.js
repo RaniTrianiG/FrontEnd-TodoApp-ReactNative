@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import Main from './app/screens/Main';
 import Todo from './app/screens/Todo';
+import Update from './app/screens/Update';
 
 import store from './app/components/store';
 import { Provider } from 'react-redux';
@@ -20,7 +21,8 @@ export default class ProjectMeel extends Component {
 
 const AppStackNavigator = createStackNavigator({
   Main: Main,
-  Todo: Todo
+  Todo: Todo,
+  Update: Update
 },
 {
   headerLayoutPreset: 'center'

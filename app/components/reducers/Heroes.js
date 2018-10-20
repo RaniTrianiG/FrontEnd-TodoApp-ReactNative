@@ -4,7 +4,8 @@
      fetching: false,
      fetched: false,
      error: null,
-     heroes: []
+     heroes: [],
+     hero: {}
  }
 
  const dataheroes = function(state = initialState, action){
@@ -33,14 +34,14 @@
             return {...state, fetching: true};
         break;
         case 'UPDATE_FETCH_HERO_FULFILLED' : // jika data sukses, akan melakukan action ini
-            const newHeroesAfterUpdate = state.heroes.map(hero => {
-                if(hero._id == action.payload.data._id){
-                    return action.payload.data;
-                }
-                return contact;
-            })
-            return {...state, heroes: newHeroesAfterUpdate, fetching: false};
-        break;
+        const updated = state.heroes.map(hero => {
+	        if (hero._id == action.payload.data._id) {
+	          return action.payload.data;
+	        }
+	        return hero;
+	      })
+	     return {...state, fetching : false, fetched: true, hero : action.payload.data, heroes : updated };
+            break;
         case 'UPDATE_FETCH_HERO_REJECTED' : // jika data gagal / error maka data akan melakukan action ini
             return {...state, error: action.payload};
         break;
@@ -49,7 +50,7 @@
             return {...state, fetching: true};
         break;
         case 'DELETE_FETCH_HERO_FULFILLED' :
-            return {...state, fetching: false, fetched: true, heroes: [...state.heroes, action.payload.data]};
+            return {...state, fetching: false, fetched: true, heroes: state.heroes.filter(heroes => heroes._id !== action.payload.data._id)};
         break;
         case 'DELETE_FETCH_HERO_REJECTED' :
             return {...state, erroe: action.payload};

@@ -49,8 +49,8 @@ class Todo extends Component {
             submitButton=(
                 <Button block style={{backgroundColor:'green'}}
                 onPress={() => Alert.alert(
-                'Berhasil!',
-                'Data berhasil di masukkan ke database.',
+                'Success!',
+                'Success save to database.',
                 [
                     {text: 'OK', onPress: () => this.Next( this.setState({
                         value : ''

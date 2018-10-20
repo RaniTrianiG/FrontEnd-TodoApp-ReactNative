@@ -22,15 +22,14 @@ export function createHeroes(data){
     };
 }
 
-export function updateHeroes(data){
+export function updateHeroes(id, value){
     return{
         type: 'UPDATE_FETCH_HERO',
         payload: 
-
         axios({
             method: 'put',
-            url: 'http://192.168.0.31:5000/api/heroes/${data._id}',
-            data: data
+            url: `http://192.168.0.31:5000/api/heroes/${id}`,
+            data: value
         })
     }
 }

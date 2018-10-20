@@ -24,7 +24,6 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
             age: '18 Tahun',
             val:''
         }
@@ -34,21 +33,26 @@ class Main extends Component {
       componentDidMount() { 
         this.props.dispatch(fetchHeroes());
     }
-    Next = (id) => {
+    Next (id) {
         this.props.dispatch(deleteHeroes(id));
+    }
+
+    handleNavigate = (item) => {
+        this.props.navigation.push('Update',item );
     }
     
     _keyExtractor = ({_id}, index) => _id;
 
-    _renderItem = ({item, data, index}) => (
+    _renderItem = ({item, index}) => (
         <View>
             <ListItem
-                keyExtractor={this._keyExtractor}
+                
                 onPress={() => Alert.alert(
                     'Notification!',
-                    'Are you sure want to delete this list item ?',
+                    'Please select action that you want to do.',
                     [
-                        {text: 'DELETE', onPress: () => this.Next(item._id)}
+                        {text: 'DELETE', onPress: () => this.Next(item._id)},
+                        {text: 'UPDATE', onPress: () =>  this.handleNavigate(item)}
                     ])}
                 >
             

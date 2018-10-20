@@ -6,6 +6,8 @@ Made by : Rani Triani Gustia :heart:
 * Fetch Data From API
 * View List Name from DB
 * ADD Text From Input Type
+* UPDATE Text From Input Type
+* DELETE Text From List Item
 
 ## Technology
 * React Native As Layouting
